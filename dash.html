@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natal Experience 2026 - Dashboard Executivo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header .subtitle {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .checkin-showcase {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+            align-items: center;
+        }
+
+        .checkin-text h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .services-delivered {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 3px solid #4caf50;
+        }
+
+        .services-delivered h4 {
+            color: #2e7d32;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .services-delivered ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .services-delivered li {
+            color: #555;
+            padding: 4px 0;
+            font-size: 0.9em;
+        }
+
+        .services-delivered li:before {
+            content: "✓ ";
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .services-test {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #ff9800;
+        }
+
+        .services-test h4 {
+            color: #e65100;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .services-test ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .services-test li {
+            color: #555;
+            padding: 4px 0;
+            font-size: 0.9em;
+        }
+
+        .services-test li:before {
+            content: "🧪 ";
+            margin-right: 5px;
+        }
+
+        .checkin-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .checkin-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .company-info {
+            color: #555;
+            line-height: 1.6;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+
+        .event-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .info-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .info-badge strong {
+            display: block;
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .info-badge span {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .metric-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .chart-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bar-label {
+            min-width: 150px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .bar-wrapper {
+            flex: 1;
+            background: #f0f0f0;
+            border-radius: 10px;
+            height: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            transition: width 1s ease;
+        }
+
+        .filter-section {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-section label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .filter-section select {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            font-size: 0.95em;
+            cursor: pointer;
+            background: white;
+        }
+
+        .filter-section input {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            font-size: 0.95em;
+            flex: 1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background: #f0f0ff;
+        }
+
+        .photos-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .photo-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .photo-real {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .photo-caption {
+            color: #666;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .features {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: start;
+            gap: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .feature-text p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .table-wrapper {
+            max-height: 600px;
+            overflow-y: auto;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .checkin-showcase {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header animate">
+            <h1>🎉 Evento Natal Experience 2026</h1>
+            <div class="subtitle">Dashboard Executivo de Controle de Acesso</div>
+            
+            <div class="checkin-showcase">
+                <div class="checkin-text">
+                    <h3>✅ Serviços Entregues</h3>
+                    <div class="services-delivered">
+                        <h4>Operacionais</h4>
+                        <ul>
+                            <li>Cadastro Ágil</li>
+                            <li>Check-in com Reconhecimento Facial</li>
+                            <li>Dashboard Operacional em Tempo Real</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="services-test">
+                        <h4>Liberados para Testes</h4>
+                        <ul>
+                            <li>Pagamento em Lote</li>
+                            <li>Comprovante Automático</li>
+                            <li>Dashboard Financeiro</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="company-info">
+                        <strong>Sobre a Lanup:</strong> Somos uma consultoria tecnológica especializada em soluções de RH para eventos. 
+                        Oferecemos plataformas integradas que otimizam processos de cadastro, controle de acesso, gestão de equipes e 
+                        pagamentos, trazendo eficiência, segurança e transparência para produtores e operadores de eventos.
+                    </div>
+                </div>
+                
+                <div class="checkin-image">
+                    <svg width="280" height="300" viewBox="0 0 280 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Smartphone -->
+                        <rect x="80" y="40" width="120" height="220" rx="15" fill="#2C3E50" stroke="#34495E" stroke-width="3"/>
+                        <rect x="90" y="55" width="100" height="180" rx="5" fill="#ECF0F1"/>
+                        
+                        <!-- Tela do app com foto -->
+                        <circle cx="140" cy="115" r="30" fill="#667eea"/>
+                        <circle cx="140" cy="105" r="12" fill="#ECF0F1"/>
+                        <path d="M140 117 C130 117, 125 125, 125 130 L155 130 C155 125, 150 117, 140 117" fill="#ECF0F1"/>
+                        
+                        <!-- Botão de confirmar -->
+                        <rect x="100" y="160" width="80" height="30" rx="8" fill="#4CAF50"/>
+                        <text x="140" y="180" text-anchor="middle" fill="white" font-size="12" font-weight="bold">✓ Check-in</text>
+                        
+                        <!-- Mão segurando -->
+                        <ellipse cx="140" cy="270" rx="45" ry="25" fill="#FFD9B3"/>
+                        <rect x="115" y="250" width="50" height="20" fill="#FFD9B3"/>
+                        
+                        <!-- Dedo no botão -->
+                        <ellipse cx="140" cy="175" rx="15" ry="20" fill="#FFD9B3" opacity="0.8"/>
+                        
+                        <!-- Pessoa ao fundo -->
+                        <circle cx="220" cy="150" r="25" fill="#95A5A6"/>
+                        <path d="M220 175 L220 225 M220 190 L200 210 M220 190 L240 210 M220 225 L200 255 M220 225 L240 255" 
+                              stroke="#95A5A6" stroke-width="8" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="event-info">
+                <div class="info-badge">
+                    <strong>📅 Data</strong>
+                    <span>06/02/2026</span>
+                </div>
+                <div class="info-badge">
+                    <strong>📍 Local</strong>
+                    <span>Prainha - Via Costeira - Natal/RN</span>
+                </div>
+                <div class="info-badge">
+                    <strong>🏢 Operador</strong>
+                    <span>Work Bar</span>
+                </div>
+                <div class="info-badge">
+                    <strong>👥 Colaboradores</strong>
+                    <span>240 pessoas</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card animate" style="animation-delay: 0.1s">
+                <h3>Total de Participantes</h3>
+                <div class="metric-value">240</div>
+            </div>
+            <div class="metric-card animate" style="animation-delay: 0.2s">
+                <h3>Check-ins Realizados</h3>
+                <div class="metric-value">240</div>
+            </div>
+            <div class="metric-card animate" style="animation-delay: 0.3s">
+                <h3>Taxa de Presença</h3>
+                <div class="metric-value">100%</div>
+            </div>
+            <div class="metric-card animate" style="animation-delay: 0.4s">
+                <h3>Funções Diferentes</h3>
+                <div class="metric-value">10</div>
+            </div>
+        </div>
+
+        <div class="chart-container animate" style="animation-delay: 0.5s">
+            <div class="chart-title">📊 Distribuição por Função</div>
+            <div class="bar-chart">
+                <div class="bar-item">
+                    <div class="bar-label">Atendente de bar</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 47.9%">115</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Caixa</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 38.3%">92</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Garçom</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 6.25%">15</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Apoio-carregador</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 2.9%">7</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Chefe de bar</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 2.1%">5</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Coordenador</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 1.25%">3</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Gerente</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 0.42%">1</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Estoquista</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 0.42%">1</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Líder de bar</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 0.42%">1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="photos-section animate" style="animation-delay: 0.6s">
+            <div class="chart-title">📸 Registros de Check-in em Tempo Real</div>
+            <div style="background: #fff3cd; padding: 15px; border-radius: 10px; margin: 15px 0; border-left: 4px solid #ffc107;">
+                <p style="color: #856404; margin: 0; font-size: 0.95em;">
+                    🔒 <strong>Proteção de Dados (LGPD):</strong> As imagens dos colaboradores são protegidas por questões de privacidade. 
+                    Após a assinatura do contrato, você terá acesso completo aos relatórios com registros fotográficos, 
+                    timestamps detalhados e todas as informações de controle de acesso.
+                </p>
+            </div>
+            <div class="photos-grid">
+                <div class="photo-card">
+                    <div class="photo-placeholder">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle cx="60" cy="40" r="20" fill="white"/>
+                            <path d="M60 60 C40 60, 30 75, 30 85 L90 85 C90 75, 80 60, 60 60" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="photo-caption">Check-in confirmado<br>07/02/2026 01:28</div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-placeholder">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle cx="60" cy="40" r="20" fill="white"/>
+                            <path d="M60 60 C40 60, 30 75, 30 85 L90 85 C90 75, 80 60, 60 60" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="photo-caption">Check-in confirmado<br>08/02/2026 21:56</div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-placeholder">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle cx="60" cy="40" r="20" fill="white"/>
+                            <path d="M60 60 C40 60, 30 75, 30 85 L90 85 C90 75, 80 60, 60 60" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="photo-caption">Check-in confirmado<br>08/02/2026 21:34</div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-placeholder">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle cx="60" cy="40" r="20" fill="white"/>
+                            <path d="M60 60 C40 60, 30 75, 30 85 L90 85 C90 75, 80 60, 60 60" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="photo-caption">Check-in confirmado<br>08/02/2026 22:04</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features animate" style="animation-delay: 0.7s">
+            <div class="chart-title">⚡ Diferenciais da Plataforma Lanup</div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-text">
+                        <h4>Tecnologia Ágil</h4>
+                        <p>Implementação rápida e intuitiva, com interface moderna e responsiva para qualquer dispositivo.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-text">
+                        <h4>Segurança e Conformidade</h4>
+                        <p>Sistema em conformidade com LGPD, com criptografia de dados e controle de acesso rigoroso.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-text">
+                        <h4>Gestão Financeira</h4>
+                        <p>Controle completo de pagamentos, comprovantes automáticos e relatórios financeiros detalhados.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text">
+                        <h4>Business Intelligence</h4>
+                        <p>Dashboards em tempo real com métricas estratégicas para tomada de decisão baseada em dados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container animate" style="animation-delay: 0.8s">
+            <div class="chart-title">📋 Registro Completo de Presença - 06/02/2026</div>
+            
+            <div class="filter-section">
+                <label>Filtrar por função:</label>
+                <select id="funcaoFilter" onchange="filterTable()">
+                    <option value="">Todas as funções</option>
+                    <option value="Apoio-carregador">Apoio-carregador</option>
+                    <option value="Atendente de bar">Atendente de bar</option>
+                    <option value="Caixa">Caixa</option>
+                    <option value="Chefe de bar">Chefe de bar</option>
+                    <option value="Coordenador">Coordenador</option>
+                    <option value="Estoquista">Estoquista</option>
+                    <option value="Garçom">Garçom</option>
+                    <option value="Gerente">Gerente</option>
+                    <option value="Líder de bar">Líder de bar</option>
+                </select>
+                
+                <label>Buscar nome:</label>
+                <input type="text" id="nomeFilter" onkeyup="filterTable()" placeholder="Digite o nome...">
+            </div>
+            
+            <div class="table-wrapper">
+                <table id="presencaTable">
+                    <thead>
+                        <tr>
+                            <th>Função</th>
+                            <th>Nome</th>
+                            <th>Horário de Check-in</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Os dados serão inseridos aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados de exemplo - baseados nas imagens fornecidas
+        const presencaData = [
+            // Apoio-carregador
+            {funcao: "Apoio-carregador", nome: "ADAILSON LIMA DE OLIVEIRA", checkin: "07/02/2026 01:28:05"},
+            {funcao: "Apoio-carregador", nome: "ALDIVAN DE OLIVEIRA", checkin: "07/02/2026 01:28:05"},
+            {funcao: "Apoio-carregador", nome: "FERNANDO SEVERINO FERNANDES DOS SANTOS", checkin: "07/02/2026 01:35:06"},
+            {funcao: "Apoio-carregador", nome: "FRANCISCO MOREIRA LEANDRO", checkin: "07/02/2026 01:35:48"},
+            {funcao: "Apoio-carregador", nome: "GUILHERME STHEIN DO NASCIMENTO", checkin: "07/02/2026 01:42:30"},
+            {funcao: "Apoio-carregador", nome: "LENILSON NASCIMENTO DA COSTA", checkin: "07/02/2026 01:35:18"},
+            
+            // Amostra de Atendentes de bar (115 total)
+            {funcao: "Atendente de bar", nome: "ADRIAN LUCAS SILVA DO NASCIMENTO", checkin: "08/02/2026 20:23:38"},
+            {funcao: "Atendente de bar", nome: "ALAN CLEITON ELIAS DA SILVA", checkin: "08/02/2026 21:56:50"},
+            {funcao: "Atendente de bar", nome: "ALESSANDRO FERREIRA BERTIM", checkin: "08/02/2026 21:36:15"},
+            {funcao: "Atendente de bar", nome: "ALESSANDRA KELLY MARINHO DA SILVA", checkin: "08/02/2026 21:34:57"},
+            {funcao: "Atendente de bar", nome: "ALESSANDRA NASCIMENTO DE SOUZA", checkin: "08/02/2026 21:32:54"},
+            
+            // Amostra de Caixa (92 total)
+            {funcao: "Caixa", nome: "AMANDA HERMOGENS", checkin: "08/02/2026 21:19:07"},
+            {funcao: "Caixa", nome: "AMANDA IONARA FARIAS DE OLIVEIRA", checkin: "08/02/2026 21:28:03"},
+            {funcao: "Caixa", nome: "ANDERSON FERREIRA DE LIMA", checkin: "08/02/2026 21:23:57"},
+            
+            // Chefe de bar
+            {funcao: "Chefe de bar", nome: "JESSICA RAIANE ALVES DE LIMA", checkin: "08/02/2026 21:59:12"},
+            {funcao: "Chefe de bar", nome: "RONALDO NUNES DA SILVA CARVALHO", checkin: "08/02/2026 20:38:41"},
+            {funcao: "Chefe de bar", nome: "SAMUEL ALVES OTAVIANO PAIVA", checkin: "08/02/2026 22:21:19"},
+            
+            // Coordenador
+            {funcao: "Coordenador", nome: "JOAO MARIA PEDRO ALVES", checkin: "07/02/2026 01:31:54"},
+            {funcao: "Coordenador", nome: "MARIA JOSE DA SILVA AQUINO", checkin: "08/02/2026 21:14:38"},
+            {funcao: "Coordenador", nome: "NADJA CAZUZA DA SILVA FIGUEREDO", checkin: "08/02/2026 21:44:31"},
+            
+            // Estoquista
+            {funcao: "Estoquista", nome: "RICARDO WYLKER COSME FELIX", checkin: "07/02/2026 01:30:01"},
+            
+            // Garçom
+            {funcao: "Garçom", nome: "ANDERSON DANILO FLORIANO DA SILVA", checkin: "08/02/2026 20:18:50"},
+            {funcao: "Garçom", nome: "ANDRE LUIZ FIGUEIREDO", checkin: "08/02/2026 20:46:15"},
+            {funcao: "Garçom", nome: "DENIS MOTA FARIAS DOS SANTOS", checkin: "08/02/2026 20:19:27"},
+            
+            // Gerente
+            {funcao: "Gerente", nome: "GUSTAVO TADEU LOBO ARAUJO DE MEDEIROS", checkin: "08/02/2026 21:18:31"},
+            
+            // Líder de bar
+            {funcao: "Líder de bar", nome: "YANCA MENDES DE SOUZA ALVES", checkin: "08/02/2026 21:49:19"}
+        ];
+        
+        // Preencher tabela
+        function populateTable(data) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            data.forEach(item => {
+                const row = tbody.insertRow();
+                row.insertCell(0).textContent = item.funcao;
+                row.insertCell(1).textContent = item.nome;
+                row.insertCell(2).textContent = item.checkin;
+            });
+        }
+        
+        // Filtrar tabela
+        function filterTable() {
+            const funcaoFilter = document.getElementById('funcaoFilter').value.toLowerCase();
+            const nomeFilter = document.getElementById('nomeFilter').value.toLowerCase();
+            
+            const filteredData = presencaData.filter(item => {
+                const matchFuncao = !funcaoFilter || item.funcao.toLowerCase() === funcaoFilter;
+                const matchNome = !nomeFilter || item.nome.toLowerCase().includes(nomeFilter);
+                return matchFuncao && matchNome;
+            });
+            
+            populateTable(filteredData);
+        }
+        
+        // Inicializar
+        populateTable(presencaData);
+        
+        // Animar barras ao carregar
+        window.addEventListener('load', () => {
+            const bars = document.querySelectorAll('.bar-fill');
+            bars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanup Natal & G Guga Lobo - Dashboard Executivo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header .subtitle {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .event-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .info-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .info-badge strong {
+            display: block;
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .info-badge span {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .metric-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .chart-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bar-label {
+            min-width: 150px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .bar-wrapper {
+            flex: 1;
+            background: #f0f0f0;
+            border-radius: 10px;
+            height: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            transition: width 1s ease;
+        }
+
+        .photos-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .photo-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .photo-real {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .photo-caption {
+            color: #666;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .features {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: start;
+            gap: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .feature-text p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header animate">
+            <h1>🎉 Lanup Natal & G Guga Lobo</h1>
+            <div class="subtitle">Dashboard Executivo de Controle de Acesso | Case de Sucesso Lanup</div>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #667eea;">
+                <h3 style="color: #667eea; margin-bottom: 10px;">📋 Case de Sucesso: Implementação Instantânea</h3>
+                <p style="color: #555; line-height: 1.6; margin-bottom: 10px;">
+                    <strong>Evento:</strong> Na Praia Thullio Milionário | <strong>Cliente:</strong> Best Bar<br>
+                    <strong>Data:</strong> 23/01/2026 | <strong>Local:</strong> Cirquinho da Folia, Praia de Pirangi, Parnamirim-RN
+                </p>
+                <p style="color: #555; line-height: 1.6; margin-bottom: 10px;">
+                    Durante a apresentação comercial, nosso sócio Gustavo demonstrou na prática a velocidade e eficiência da plataforma Lanup. 
+                    Em questão de minutos, implementamos o sistema completo de controle de acesso para o evento Na Praia Thullio Milionário, 
+                    registrando 36 colaboradores em tempo real com verificação fotográfica e controle de funções.
+                </p>
+                <p style="color: #555; line-height: 1.6;">
+                    <strong>Resultado:</strong> Sistema operacional no mesmo dia da apresentação, com 100% de precisão nos registros, 
+                    demonstrando nossa capacidade de resposta imediata e implementação ágil sem necessidade de longos processos de setup.
+                </p>
+            </div>
+            
+            <div class="event-info">
+                <div class="info-badge">
+                    <strong>🏢 Cliente</strong>
+                    <span>Best Bar</span>
+                </div>
+                <div class="info-badge">
+                    <strong>🎤 Evento</strong>
+                    <span>Na Praia Thullio Milionário</span>
+                </div>
+                <div class="info-badge">
+                    <strong>📅 Data</strong>
+                    <span>23/01/2026</span>
+                </div>
+                <div class="info-badge">
+                    <strong>📍 Local</strong>
+                    <span>Cirquinho da Folia - Praia de Pirangi - Parnamirim/RN</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card animate" style="animation-delay: 0.1s">
+                <h3>Total de Participantes</h3>
+                <div class="metric-value">36</div>
+            </div>
+            <div class="metric-card animate" style="animation-delay: 0.2s">
+                <h3>Check-ins Realizados</h3>
+                <div class="metric-value">36</div>
+            </div>
+            <div class="metric-card animate" style="animation-delay: 0.3s">
+                <h3>Taxa de Presença</h3>
+                <div class="metric-value">100%</div>
+            </div>
+            <div class="metric-card animate" style="animation-delay: 0.4s">
+                <h3>Funções Diferentes</h3>
+                <div class="metric-value">7</div>
+            </div>
+        </div>
+
+        <div class="chart-container animate" style="animation-delay: 0.5s">
+            <div class="chart-title">📊 Distribuição por Função</div>
+            <div class="bar-chart">
+                <div class="bar-item">
+                    <div class="bar-label">Garçom</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 30.5%">11</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Atendente de bar</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 33.3%">12</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Caixa</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 22.2%">8</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Chefe de bar</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 5.5%">2</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Coordenador</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 2.8%">1</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Financeiro</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 2.8%">1</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Gerente</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-fill" style="width: 2.8%">1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="photos-section animate" style="animation-delay: 0.6s">
+            <div class="chart-title">📸 Registros de Check-in em Tempo Real</div>
+            <div style="background: #fff3cd; padding: 15px; border-radius: 10px; margin: 15px 0; border-left: 4px solid #ffc107;">
+                <p style="color: #856404; margin: 0; font-size: 0.95em;">
+                    🔒 <strong>Proteção de Dados (LGPD):</strong> As imagens dos colaboradores são protegidas por questões de privacidade. 
+                    Após a assinatura do contrato, você terá acesso completo aos relatórios com registros fotográficos, 
+                    timestamps detalhados e todas as informações de controle de acesso.
+                </p>
+            </div>
+            <div class="photos-grid">
+                <div class="photo-card">
+                    <div class="photo-placeholder">🔒</div>
+                    <div class="photo-caption">Check-in confirmado<br>23/01/2026 21:31:50</div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-placeholder">🔒</div>
+                    <div class="photo-caption">Check-in confirmado<br>23/01/2026 19:37:28</div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-placeholder">🔒</div>
+                    <div class="photo-caption">Check-in confirmado<br>23/01/2026 21:44:33</div>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-placeholder">🔒</div>
+                    <div class="photo-caption">Check-in confirmado<br>23/01/2026 20:28:05</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features animate" style="animation-delay: 0.7s">
+            <div class="chart-title">⚡ Nossa Solução: Diferenciais Competitivos</div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-text">
+                        <h4>Agilidade</h4>
+                        <p>Implementação e operação em tempo recorde. Sistema demonstrado e implantado na mesma apresentação.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-text">
+                        <h4>Segurança</h4>
+                        <p>Controle rigoroso de acesso com registro fotográfico e verificação de identidade em tempo real.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-text">
+                        <h4>Redução de Custos</h4>
+                        <p>Eliminação de processos manuais e otimização de recursos operacionais do evento.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text">
+                        <h4>Eficiência</h4>
+                        <p>Dados em tempo real, dashboards executivos e relatórios automáticos para tomada de decisão.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container animate" style="animation-delay: 0.8s">
+            <div class="chart-title">📋 Registro Completo de Chegadas - 23/01/2026</div>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                    <thead>
+                        <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Nome</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Função</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Horário de Entrada</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">ALESSANDRA NASCIMENTO DE SOUZA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Atendente de bar</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:31:50</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">ÁLVARO FIGUEREDO FARIAS</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:37:28</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">ANDERSON DANILO E LORIANO DA SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:36:00</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">ANDRÉ LUIZ FIGUEIREDO</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:42:23</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">ANDREIYNE KAROLYNE DO NASCIMENTO</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Atendente de bar</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:34:06</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">BARBARA ANDREZA PEREIRA SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:45:10</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">BRENA KALINE SILVA SOUZA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 02:44:19</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">BRENA KALINE SILVA SOUZA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:44:33</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">DÉBORAH LUIZA DA CONCEIÇÃO COSTA SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Atendente de bar</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:21:45</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">DIENE MARCELINO DA SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Caixa</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:39:27</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">ELIENAIDE GRIS DA SILVA OLIVEIRA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Atendente de bar</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:20:42</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">ELIMARA NASCIMENTO DA CAMARA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Coordenador</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:28:05</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">ELIZANGELA GOMES SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Chefe de bar</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:25:23</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">FATIMA LIMA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Gerente</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:29:08</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">FRANCISCO GABRIEL SEVERIANO</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Caixa</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:36:59</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">HENRIQUE FERREIRA NOBRE NETO</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:45:46</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">JOÃO GABRIEL FELIX DE LIMA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:38:30</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">JOAO VITOR NASCIMENTO DE SOUZA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Atendente de bar</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:32:54</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">JORDÂNEY PEREIRA SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:27:55</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">KATIA SUELI SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Caixa</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:41:47</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">LEONARDO GALVAO DA SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:47:28</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">LUCIANA KARLA SIMOES</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Atendente de bar</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 20:18:42</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">LUCIMAR DACZON DE FREITAS</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Caixa</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:46:20</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">LUIZ ANTONIO DA SILVA VARELA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:46:42</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">LUIZ CARLOS DE OLIVEIRA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:43:53</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">MARCELO DE SOUZA SOARES DA SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Garçom</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:48:20</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">MARIA VITORIA SOUSA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Caixa</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:43:30</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">PABLO ALLAN DA SILVA ANDRADE</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Atendente de bar</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:32:35</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">PATROCINIA MARIA DE ARAUJO OLIVEIRA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Atendente de bar</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:35:43</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">PEDRO HENRIQUE RODRIGUES DA SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Atendente de bar</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:30:57</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">PEDRO JOSE DA SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Caixa</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:22:51</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">RAFAELA OLIVEIRA SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Caixa</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:48:35</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">SANZIA DA COSTA SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Financeiro</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 19:36:06</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">SILVANA DA CUNHA SILVA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Caixa</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:37:41</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">SINARA PRISCILA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Chefe de bar</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 20:15:14</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">SINARA PRISCILA SANTOS DE SOUZA</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Atendente de bar</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">23/01/2026 21:24:19</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animar barras ao carregar
+        window.addEventListener('load', () => {
+            const bars = document.querySelectorAll('.bar-fill');
+            bars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
